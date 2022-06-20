@@ -25,15 +25,13 @@
 
 
 </head>
-
-<!--Body theme-->
-<body class="light-theme">
-    
+   
 <!--Content div-->
-<div id="container">
+<div id="container" class="light-theme">
+        <i onclick="toggleMode(this)" id="icon-mode" class="fa fa-toggle-off pull-right" style="font-size: 28px;"><span id="icon-text"></span></i>
 
 <!--Card for the main card & title-->
-<h1 app-header>Welcome to the Restaurant App!</h1>
+<app-header>Welcome to the Restaurant App!</app-header>
     <div id="assign-content">
         <div class="card">
             <div class="card-title">Restaurant Menu</div>
@@ -224,10 +222,44 @@ import { Bill, Beverage, Appetizer, MainCourse, Dessert } from "./index.js";
     
 
         //Sets total of bill.
-            let total = bill.getTotal();
-            document.getElementById("order-total").innerHTML = `Your order total is $${total}`;
+        document.getElementById( 'orderTotal' ).innerHTML = `Your order total is ${ bill.getTotal() }`;
         }
 
         </script>
+<script>
+
+    setDefaultTheme();
+    
+    //Onclick function to change theme
+    function toggleMode(x)  {
+        let colorTheme = document.body.classList;
+        let iconMode = x.classList;
+    
+        //console.log(colorTheme);
+    
+        if (colorTheme.value === 'light-theme') {
+            localStorage.clear();
+            localStorage.setItem('mode', 'dark-theme');
+            localStorage.setItem('iconMode', 'fa-toggle-on');
+            localStorage.setItem('iconText', 'Dark Mode');
+    
+        //console.log(localStorage);
+    
+        }
+    
+        else {
+            localStorage.clear();
+            localStorage.setItem('mode', 'light-theme');
+            localStorage.setItem('iconMode', 'fa-toggle-off');
+            localStorage.setItem('iconText', 'Light Mode');
+        }
+    
+        colorTheme.value = localStorage.getItem('mode');
+            iconMode.value = `fa ${localStorage.getItem('iconMode')} pull-right`;
+            document.getElementById('icon-text').innerHTML =
+            localStorage.getItem('iconText');
+    }
+    </script>
+
     </body>
 </html>

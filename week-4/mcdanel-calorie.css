@@ -1,0 +1,7 @@
+/*CSS class for the foodList*/
+#foodList {
+    float: right;
+    color: #df546a;
+    font-size: 12px;
+    letter-spacing: 2px;
+}

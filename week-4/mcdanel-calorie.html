@@ -1,0 +1,165 @@
+<!--
+    Title: Assignment 4 - Calorie App
+    Author: Kayla McDanel
+    Date: 19 June 2022
+    Description: App that counts calories
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WEB 330 - Enterprise JavaScript II</title>
+
+<!--Linked stylesheets-->
+    <link rel="stylesheet" href="../site.css">
+    <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="mcdanel-calorie.css">
+
+<!--Linked Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <script type="application/javascript" src="../theme.js"></script>
+
+
+</head>
+
+<body id="container" class="light-theme">
+        <i onclick="toggleMode(this)" id="icon-mode" class="fa fa-toggle-off pull-right" style="font-size: 28px;"><span id="icon-text"></span></i>
+
+<!--Card for the main card & title-->
+    <h1 class="app-header">Welcome to the Calorie App!</h1>
+    
+<!--Input field-->    
+    <div id="form">
+        <div class="card">
+             <div class="card-title">Calorie Search Form</div>
+        </div>
+    </div>
+                
+    <div class="card-content">
+        <div class="form">
+            <div class="form-field">
+                <label for="txtFoodItem">Enter a food item:</label>
+                <input type="text" id="txtFoodItem"><br>
+                <span id="foodList">(Ex. Egg, Apple, Hamburger, Fries, Banana, Soda)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form field">
+        <button class="btn btn-primary full-width" id="btnSearch">Search</button>
+    </div>
+
+    
+<div id="form-results">
+    <div class="card">
+        <div class="card-title">Search Results</div>
+        <div class="card-content" id="searchResults">
+            <table>
+                <tbody id="tableResults">
+                    
+                        <tr>
+                            <th>Name</th>
+                            <th>Calories</th>
+                        </tr>
+                    
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<a class="return-home" href="../index.html">Return</a>
+
+<!--JavaScript functions-->
+<script type="module">
+    setSelectedTheme();
+
+//Imports the calorie converter results
+import  { CalorieConverter } from "./calorie-converter.js";
+
+    let txtFoodItemEl=document.getElementById('txtFoodItem');
+
+//Button function
+document.getElementById('button').onclick=() => {
+
+//Retrieves input value 
+    let txtFoodItem=txtFoodItemEl.value;
+
+    let foods=CalorieConverter.find(txtFoodItem.toLowerCase());
+
+//Provides results
+let tableData=`
+         <table class="table">
+            <th>Name</th>
+            <th>Calories</th>
+            <tbody class="table-hover">`;
+    for(let item of foods) {
+        tableData+=`<tr>
+            <td>${item.name}</td>
+            <td>${item.calories}</td>
+            </tr>`;
+    }
+    document.getElementById('searchResults').innerHTML=
+        tableData+` </tbody></table>`;
+
+};
+
+//Makes enter button function like mouse click
+window.addEventListener('keyup',(event) => {
+    if(event.keyCode===13) {
+        event.preventDefault();
+        document.getElementById('button').click();
+    }
+});
+
+//Array of objects from Calorie converter Class
+const foodList=CalorieConverter.data;
+
+let foodListData=`<i>(Ex: `;
+for(let name of foodList) {
+    foodListData+=name.name+', ';
+}
+document.getElementById('foodList').innerHTML=
+    foodListData.slice(0,-2)+')</i>';
+
+</script>
+
+<script>
+
+    setDefaultTheme();
+    
+    //Onclick function to change theme
+    function toggleMode(x)  {
+        let colorTheme = document.body.classList;
+        let iconMode = x.classList;
+    
+        //console.log(colorTheme);
+    
+        if (colorTheme.value === 'light-theme') {
+            localStorage.clear();
+            localStorage.setItem('mode', 'dark-theme');
+            localStorage.setItem('iconMode', 'fa-toggle-on');
+            localStorage.setItem('iconText', 'Dark Mode');
+    
+        //console.log(localStorage);
+    
+        }
+    
+        else {
+            localStorage.clear();
+            localStorage.setItem('mode', 'light-theme');
+            localStorage.setItem('iconMode', 'fa-toggle-off');
+            localStorage.setItem('iconText', 'Light Mode');
+        }
+    
+        colorTheme.value = localStorage.getItem('mode');
+            iconMode.value = `fa ${localStorage.getItem('iconMode')} pull-right`;
+            document.getElementById('icon-text').innerHTML =
+            localStorage.getItem('iconText');
+    }
+    </script>
+</body>
+</html>

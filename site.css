@@ -23,10 +23,11 @@ Description: global stylesheet*/
 }
 
 /*Recycled Styling from Web 231*/
-#app-header {
-    background-color: #3c275a;
-    color: #fff;
-    padding: 20px;
+.app-header {
+    background-color: inherit;
+    color: inherit;
+    border: none;
+    font-weight: 400;
     text-align: center;
 }
 

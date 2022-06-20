@@ -117,6 +117,11 @@ body.light-theme {
     --btn-hover-background-color: #d6a800;
     --btn-hover-color: #4f3674;
     --input-border-color: #ccc;
+    --table-header-background-color: #4f3674;
+    --table-header-color: #fff;
+    --table-boarder-color:#ddd;
+    --table-hover-background-color: #D6A800;
+    --table-hover-color: #4f3674;
 }
 
 /*Dark theme style*/
@@ -138,4 +143,36 @@ body.dark-theme {
     --btn-hover-background-color: #7d4787;
     --btn-hover-color: #fff;
     --input-border-color: #303030;
+    --table-header-background-color: #D176E1;
+    --table-header-color: #fff;
+    --table-boarder-color:#303030;
+    --table-hover-background-color: #7D4787;
+    --table-hover-color: #fff;
+}
+/*Added from WEB 231*/
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: var(--table-header-background-color);
+    color: var(--table-header-color);
+    
+}
+
+th, td {
+    border: var(--table-boarder-color);
+    text-align: left;
+}
+
+.table-hover {
+    background-color: var(--table-hover-background-color);
+    color: var(--table-hover-color);
+    cursor: pointer;
 }
