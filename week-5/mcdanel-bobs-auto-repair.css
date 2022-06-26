@@ -1,0 +1,28 @@
+/*//Title: Assignment 5
+//Author: Kayla McDanel
+//Date: 23 June 2022
+//Description: Shopping cart app
+*/
+
+#cart-message   {
+    float: right;
+    color: #df546a;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+#cart-message:hover {
+    cursor: pointer;
+}
+
+.fa-shopping-cart   {
+    text-align: center;
+}
+
+#cartIcon   {
+    align-items: center;
+}
+
+cart-component  {
+    align-items: center;
+}

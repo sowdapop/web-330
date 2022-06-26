@@ -1,0 +1,135 @@
+<!--
+    Title: Assignment 5
+    Author: Kayla McDanel
+    Date: 23 June 2022
+    Description: Shopping cart app
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WEB 330 - Enterprise JavaScript II</title>
+
+<!--Linked stylesheets-->
+    <link rel="stylesheet" href="../site.css">
+    <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="mcdanel-calorie.css">
+
+<!--Linked Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <script type="application/javascript" src="../theme.js"></script>
+
+
+</head>
+<body id="container" class="light-theme">
+    <i onclick="toggleMode(this)" id="icon-mode" class="fa fa-toggle-off pull-right" style="font-size: 28px;"><span id="icon-text"></span></i>
+
+<!--Card for the main card & title-->
+<div class="app-header">Welcome to Bob's Automotive Repair Shop!</div>
+
+<!--Input field-->    
+<div id="form">
+    <div class="card">
+         <div class="card-title">Product Listing</div>
+         <cart-component></cart-component>
+    </div>
+</div>
+          
+<!--Drop down menu for automotive items-->
+<div class="card-content">
+    <div class="form">
+        <div class="form-field">
+            <label for="items">Choose a product</label>
+            <select class="drop-down-menu" id="productList">
+            <option value="select">--Select--</option>
+            <option value="19.99">Oil Change</option>
+            <option value="18.44">Filter Replacement</option>
+            <option value="9.99">Wiper Fluid Refill</option>
+            </select>
+        </div>
+        <i id="cart-message"></i>
+    </div>
+</div>
+
+<!--Submits user input-->
+<div class="form field">
+    <button class="btn btn-primary full-width" id="btnAddProduct">Add Product</button>
+</div>
+
+<!--Results-->
+<div id="form-results">
+<div class="card">
+    <div class="card-content">
+    <div class="card-title">Shopping Cart</div></div>
+    <div class="card-content">
+        <div class="card-content" id="shoppingCart">
+            <table id="cartDisplayTable"></table>
+    </div>
+</div>
+</div>
+
+<a class="return-home" href="../index.html">Return</a>    
+
+<!--JavaScript-->
+<script type="application/javascript" src="../theme.js"></script>
+<script type="module">
+    setSelectedTheme();
+
+//Importing classes
+import Product from "./product.js";
+import ShoppingCart from "./shopping-cart.js";
+
+let shoppingCart = new ShoppingCart();
+
+setCartCount();
+
+//onclick function for submit button
+document.getElementById("btnAddProduct").onclick = function(){
+    let productList = document.getElementById("productList");
+    let product = productList.options[productList.selectedIndex].text;
+    let productValue = productList.options[productList.selectedIndex].value;
+
+//If statement that compares product variable to string value
+    if (product != "--Select--"){
+        shoppingCart.add(new Product(product, productValue));
+        setCartCount();
+        alert(`${product} was added to your cart!`);
+    }
+}
+
+//Sets number of objects in product array
+function setCardCount(){
+    document.getElementById("cartIcon").innerHTML = shoppingCart.count();
+}
+
+//onclick function for cart icon
+document.getElementById("cartIcon").onclick = function(){
+    let cartDisplayTable = `
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+    </thead>`;
+
+    for(let i of shoppingCart.iterator()){
+        let row = `<tbody>2
+            <tr>
+                <td>${i.id}</td>
+                <td>${i.name}</td>
+                <td>${i.price}</td>
+            </tr>`
+            cartDisplayTable += row;
+    }
+    cartDisplayTable += "<tbody></table>";
+        document.getElementById("cartDisplayTable").innerHTML = cartDisplayTable;
+}
+
+
+</script>
+</body>
+</html>
