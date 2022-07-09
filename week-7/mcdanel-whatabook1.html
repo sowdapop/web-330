@@ -52,12 +52,14 @@
 
 <script type="application/javascript" src="../theme.js"></script>
 <script>
+    setSelectedTheme();
+    var text, domParser, xmlBooks;
 
     document.addEventListener('DOMContentLoaded', (event) => {
         console.log('DOM fully loaded and parsed');
         let fileName = 'books.xml';
 
-        fetch (fileName)
+        fetch(fileName)
         .then(res => res.text())
         .then(data => {
             let domParser = new DOMParser();
@@ -82,11 +84,11 @@ function loadBooks(xml){
          <tbody>`
             
 for (let book of books){
-        let isbn = book.getElementsByTagName("isbn")[0].childNodes[0].nodeValue;
-        let title = book.getElementsByTagName("title")[0].childNodes[0].nodeValue;
-        let description = book.getElementsByTagName("description")[0].childNodes[0].nodeValue;
-        let pages = book.getElementsByTagName("pages")[0].childNodes[0].nodeValue;
-        let author = book.getElementsByTagName("author")[0].childNodes[0].nodeValue;
+        let isbn = xmlBooks.getElementsByTagName("isbn")[0].childNodes[0].nodeValue;
+        let title = xmlBooks.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+        let description = xmlBooks.getElementsByTagName("description")[0].childNodes[0].nodeValue;
+        let pages = xmlBooks.getElementsByTagName("pages")[0].childNodes[0].nodeValue;
+        let author = xmlBooks.getElementsByTagName("author")[0].childNodes[0].nodeValue;
 
         tableData += `
             <tr>
