@@ -61,7 +61,7 @@ body    {
     font-family: 'PT Sans', sans-serif;
     text-align: justify;
     padding: 10px;
-    background-image: linear-gradient(to left, purple, magenta  );
+    background-image: url("../images/rocks1.jpg");
 }
 
 p {
@@ -78,7 +78,7 @@ footer  {
   display: inline-block;
   position: fixed;
   bottom: 0;
-  height: 30px;
+  height: 10px;
 }
 
 a:link  {
@@ -137,4 +137,29 @@ footer a:visited {
 .left  {
   float: left;
   padding: 10px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.card-title {
+  text-align: center;
+  font-size: 2em;
+  color: aliceblue;
+  font-weight: 400;
+}
+
+.card-content {
+  padding: 2px 16px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.side-by-side {
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
